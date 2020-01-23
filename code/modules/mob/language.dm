@@ -135,6 +135,16 @@
 	key = "6"
 	syllables = list("ook","eek", "ack", "ookie", "eekie", "AHAH", "ree", "mudik", "bix", "nood", "mof", "ugga")
 
+/datum/language/insectoid
+	name = LANGUAGE_INSECT
+	desc = "A collection of disquieting vibrations and chittering sounds, the spoken tongue of insectoids. "
+	speech_verb = "chitters"
+	ask_verb = "clicks"
+	exclaim_verb = "hisses"
+	colour = "gutter"
+	key = "y"
+	syllables = list("ch","ke","chi","tch","sk","skch","ra","kch","esk","kra","sh","tik","ech","ks")
+
 // Galactic common languages (systemwide accepted standards).
 /datum/language/trader
 	name = LANGUAGE_TRADEBAND

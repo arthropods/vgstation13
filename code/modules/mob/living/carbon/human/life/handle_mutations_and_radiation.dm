@@ -44,8 +44,6 @@
 				rad_tick = 0
 				return
 
-
-
 			var/damage = 0
 			switch(radiation)
 				if(0 to 1)
