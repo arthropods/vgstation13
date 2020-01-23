@@ -627,3 +627,19 @@
 	my_fac.HandleRecruitedRole(new_role)
 	new_role.Greet(GREET_DEFAULT)
 	new_role.AnnounceObjectives()
+
+//////////////////////////////////////////////
+//                                          //
+//             MARTIAN TOURIST              ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                          //
+//////////////////////////////////////////////
+
+/datum/dynamic_ruleset/midround/from_ghosts/tourist
+	name = "Martian\'s Day Out"
+	role_category = /datum/role/tourist
+	requirements = list(0,0,0,0,0,0,0,0,0,0)
+	required_candidates = 1
+	max_candidates = 5
+	weight = 1
+	cost = 5
+	high_population_requirement = 0
