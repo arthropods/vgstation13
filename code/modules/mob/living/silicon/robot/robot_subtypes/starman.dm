@@ -156,8 +156,8 @@
 			user.adjustToxLoss(-heal_amount)
 		var/mob/living/silicon/robot/robot = user
 		if(istype(robot))
-			for(var/name in robot.components)
-				var/datum/robot_component/component = robot.components[name]
+			for(var/name in robot.robot_components)
+				var/datum/robot_component/component = robot.robot_components[name]
 				component.heal_damage(30,30)
 		user.updatehealth()	
 		playsound(user, 'sound/effects/psi/psi_lifeup_alpha.ogg', 15, 0)

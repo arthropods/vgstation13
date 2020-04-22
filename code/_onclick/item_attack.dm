@@ -29,8 +29,8 @@
 			I.attack(src, user, def_zone, originator)
 		else
 			I.attack(src, user, def_zone)
-	if(BrainContainer)
-		BrainContainer.SendSignal(COMSIG_ATTACKEDBY, list("assailant"=user,"damage"=I.force))
+	// if(BrainContainer)
+	// 	BrainContainer.SendSignal(COMSIG_ATTACKEDBY, list("assailant"=user,"damage"=I.force))
 
 
 

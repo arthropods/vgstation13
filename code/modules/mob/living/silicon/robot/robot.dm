@@ -45,7 +45,7 @@ var/list/cyborg_list = list()
 	var/obj/machinery/camera/camera = null
 
 	// Components are basically robot organs.
-	var/list/components = list()
+	var/list/robot_components = list()
 	var/component_extension = null
 
 	var/obj/item/device/mmi/mmi = null
@@ -125,10 +125,10 @@ var/list/cyborg_list = list()
 		if(wires.IsCameraCut()) // 5 = BORG CAMERA
 			camera.status = 0
 
-	initialize_components()
+	initialize_robot_components()
 	// Create all the robot parts.
-	for(var/V in components) if(V != "power cell")
-		var/datum/robot_component/C = components[V]
+	for(var/V in robot_components) if(V != "power cell")
+		var/datum/robot_component/C = robot_components[V]
 		C.installed = COMPONENT_INSTALLED
 		C.wrapped = new C.external_type
 
@@ -148,7 +148,7 @@ var/list/cyborg_list = list()
 		stored_freqs = 1
 
 	if(cell)
-		var/datum/robot_component/cell_component = components["power cell"]
+		var/datum/robot_component/cell_component = robot_components["power cell"]
 		cell_component.wrapped = cell
 		cell_component.installed = COMPONENT_INSTALLED
 
@@ -193,8 +193,8 @@ var/list/cyborg_list = list()
 
 /mob/living/silicon/robot/proc/upgrade_components()
 	if(component_extension)
-		for(var/V in components) if(V != "power cell")
-			var/datum/robot_component/C = components[V]
+		for(var/V in robot_components) if(V != "power cell")
+			var/datum/robot_component/C = robot_components[V]
 			var/NC = text2path("[C.external_type][component_extension]")
 			var/obj/item/robot_parts/robot_component/I = NC
 			if(initial(I.isupgrade))
@@ -344,8 +344,8 @@ var/list/cyborg_list = list()
 		<th>Powered</th>
 		<th>Toggled</th>
 	</tr>"})
-	for (var/V in components)
-		var/datum/robot_component/C = components[V]
+	for (var/V in robot_components)
+		var/datum/robot_component/C = robot_components[V]
 		dat += {"<tr>
 		<td>[C.name]</td>
 		<td>[C.energy_consumption]W</td>
@@ -594,8 +594,8 @@ var/list/cyborg_list = list()
 
 /mob/living/silicon/robot/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(opened) // Are they trying to insert something?
-		for(var/V in components)
-			var/datum/robot_component/C = components[V]
+		for(var/V in robot_components)
+			var/datum/robot_component/C = robot_components[V]
 			if(!C.installed && istype(W, C.external_type))
 				var/obj/item/robot_parts/robot_component/I = W
 				C.installed = COMPONENT_INSTALLED
@@ -668,17 +668,17 @@ var/list/cyborg_list = list()
 			else
 				// Okay we're not removing the cell or an MMI, but maybe something else?
 				var/list/removable_components = list()
-				for(var/V in components)
+				for(var/V in robot_components)
 					if(V == "power cell")
 						continue
-					var/datum/robot_component/C = components[V]
+					var/datum/robot_component/C = robot_components[V]
 					if(C.installed == COMPONENT_INSTALLED || C.installed == COMPONENT_BROKEN)
 						removable_components += V
 
 				var/remove = input(user, "Which component do you want to pry out?", "Remove Component") as null|anything in removable_components
 				if(!remove)
 					return
-				var/datum/robot_component/C = components[remove]
+				var/datum/robot_component/C = robot_components[remove]
 				if(istype(C.wrapped, /obj/item/broken_device))
 					var/obj/item/broken_device/I = C.wrapped
 					to_chat(user, "You remove \the [I].")
@@ -709,7 +709,7 @@ var/list/cyborg_list = list()
 				updateicon()
 
 	else if(istype(W, /obj/item/weapon/cell) && opened)	// trying to put a cell inside
-		var/datum/robot_component/C = components["power cell"]
+		var/datum/robot_component/C = robot_components["power cell"]
 		if(wiresexposed)
 			to_chat(user, "Close the panel first.")
 		else if(cell)
@@ -920,7 +920,7 @@ var/list/cyborg_list = list()
 	add_fingerprint(user)
 
 	if(opened && !wiresexposed && (!istype(user, /mob/living/silicon)))
-		var/datum/robot_component/cell_component = components["power cell"]
+		var/datum/robot_component/cell_component = robot_components["power cell"]
 		if(cell)
 			cell.electronics_damage = cell_component.electronics_damage
 			cell.brute_damage = cell_component.brute_damage
@@ -1273,8 +1273,8 @@ var/list/cyborg_list = list()
 	user.visible_message("<span class='notice'>[user.name] pats [name] on the head.</span>")
 
 /mob/living/silicon/robot/rejuvenate(animation = FALSE)
-	for(var/C in components)
-		var/datum/robot_component/component = components[C]
+	for(var/C in robot_components)
+		var/datum/robot_component/component = robot_components[C]
 		component.electronics_damage = 0
 		component.brute_damage = 0
 		component.installed = COMPONENT_INSTALLED

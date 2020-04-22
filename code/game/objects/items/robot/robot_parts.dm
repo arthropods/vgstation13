@@ -239,7 +239,7 @@
 
 			// Since we "magically" installed a cell, we also have to update the correct component.
 			if(O.cell)
-				var/datum/robot_component/cell_component = O.components["power cell"]
+				var/datum/robot_component/cell_component = O.robot_components["power cell"]
 				cell_component.wrapped = O.cell
 				cell_component.installed = 1
 

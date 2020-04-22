@@ -118,19 +118,19 @@
 	energy_consumption = 0
 	max_damage = 30
 
-/mob/living/silicon/robot/proc/initialize_components()
+/mob/living/silicon/robot/proc/initialize_robot_components()
 	// This only initializes the components, it doesn't set them to installed.
 
-	components["actuator"] = new/datum/robot_component/actuator(src)
-	components["radio"] = new/datum/robot_component/radio(src)
-	components["power cell"] = new/datum/robot_component/cell(src)
-	components["diagnosis unit"] = new/datum/robot_component/diagnosis_unit(src)
-	components["camera"] = new/datum/robot_component/camera(src)
-	components["comms"] = new/datum/robot_component/binary_communication(src)
-	components["armour"] = new/datum/robot_component/armour(src)
+	robot_components["actuator"] = new/datum/robot_component/actuator(src)
+	robot_components["radio"] = new/datum/robot_component/radio(src)
+	robot_components["power cell"] = new/datum/robot_component/cell(src)
+	robot_components["diagnosis unit"] = new/datum/robot_component/diagnosis_unit(src)
+	robot_components["camera"] = new/datum/robot_component/camera(src)
+	robot_components["comms"] = new/datum/robot_component/binary_communication(src)
+	robot_components["armour"] = new/datum/robot_component/armour(src)
 
 /mob/living/silicon/robot/proc/is_component_functioning(module_name)
-	var/datum/robot_component/C = components[module_name]
+	var/datum/robot_component/C = robot_components[module_name]
 	return C && C.installed == COMPONENT_INSTALLED && C.toggled && C.is_powered()
 
 /obj/item/broken_device

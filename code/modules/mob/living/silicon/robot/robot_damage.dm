@@ -9,16 +9,16 @@
 
 /mob/living/silicon/robot/getBruteLoss()
 	var/amount = 0
-	for(var/V in components)
-		var/datum/robot_component/C = components[V]
+	for(var/V in robot_components)
+		var/datum/robot_component/C = robot_components[V]
 		if(C.installed != COMPONENT_MISSING)
 			amount += C.brute_damage
 	return amount
 
 /mob/living/silicon/robot/getFireLoss()
 	var/amount = 0
-	for(var/V in components)
-		var/datum/robot_component/C = components[V]
+	for(var/V in robot_components)
+		var/datum/robot_component/C = robot_components[V]
 		if(C.installed != COMPONENT_MISSING)
 			amount += C.electronics_damage
 	return amount
@@ -41,8 +41,8 @@
 
 /mob/living/silicon/robot/proc/get_damaged_components(var/brute, var/burn, var/destroyed = FALSE)
 	var/list/datum/robot_component/parts = list()
-	for(var/V in components)
-		var/datum/robot_component/C = components[V]
+	for(var/V in robot_components)
+		var/datum/robot_component/C = robot_components[V]
 		if(C.installed == COMPONENT_INSTALLED || (C.installed == COMPONENT_BROKEN && destroyed))
 			if((brute && C.brute_damage) || (burn && C.electronics_damage) || (!C.toggled) || (!C.powered && C.toggled))
 				parts += C
@@ -50,16 +50,16 @@
 
 /mob/living/silicon/robot/proc/get_damageable_components()
 	var/list/rval = new
-	for(var/V in components)
-		var/datum/robot_component/C = components[V]
+	for(var/V in robot_components)
+		var/datum/robot_component/C = robot_components[V]
 		if(C.installed == COMPONENT_INSTALLED)
 			rval += C
 	return rval
 
 /mob/living/silicon/robot/proc/get_armour()
-	if(!components.len)
+	if(!robot_components.len)
 		return FALSE
-	var/datum/robot_component/C = components["armour"]
+	var/datum/robot_component/C = robot_components["armour"]
 	if(C && C.installed == COMPONENT_INSTALLED)
 		return C
 	return FALSE
@@ -73,7 +73,7 @@
 
 /mob/living/silicon/robot/take_organ_damage(var/brute = 0, var/burn = 0, var/sharp = 0)
 	var/list/components = get_damageable_components()
-	if(!components.len)
+	if(!robot_components.len)
 		return
 
 	 //Combat shielding absorbs a percentage of damage directly into the cell.

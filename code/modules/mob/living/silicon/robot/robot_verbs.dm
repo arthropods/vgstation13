@@ -83,10 +83,10 @@
 		return
 
 	var/list/installed_components = list()
-	for(var/V in components)
+	for(var/V in robot_components)
 		if(V == "power cell")
 			continue
-		var/datum/robot_component/C = components[V]
+		var/datum/robot_component/C = robot_components[V]
 		if(C.installed)
 			installed_components += V
 
@@ -98,7 +98,7 @@
 		to_chat(src, "<span class='warning'>You can't do that while you're incapacitated.</span>")
 		return
 
-	var/datum/robot_component/C = components[toggle]
+	var/datum/robot_component/C = robot_components[toggle]
 	if(C.toggled)
 		C.toggled = FALSE
 		to_chat(src, "<span class='warning'>You disable [C.name].</span>")

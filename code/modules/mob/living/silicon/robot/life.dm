@@ -56,8 +56,8 @@
 				for(var/M in get_all_slots())
 					cell.use(3)
 
-			for(var/V in components)
-				var/datum/robot_component/C = components[V]
+			for(var/V in robot_components)
+				var/datum/robot_component/C = robot_components[V]
 				C.consume_power()
 
 			if(!is_component_functioning("actuator"))
