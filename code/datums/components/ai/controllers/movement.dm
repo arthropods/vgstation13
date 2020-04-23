@@ -16,7 +16,7 @@
 	var/list/movement_nodes = list()
 	var/target
 
-/datum/component/controller/movement/astar/RecieveSignal(var/message_type, var/list/args)
+/datum/component/controller/movement/astar/ReceiveSignal(var/message_type, var/list/args)
 	if(isliving(owner))
 		var/mob/living/M = owner
 		if(message_type == COMSIG_MOVE)
