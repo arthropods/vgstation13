@@ -40,6 +40,9 @@
 		VALUE_DEFAULT_TIME = "default_time;"+VT_NUMBER,\
 		VALUE_TIMING = "timing;"+VT_NUMBER)
 
+/obj/item/device/assembly/prox_sensor/InitializeComponents()
+	TryAttachComponent(/datum/component/proximity_sensing, list(src, "activate"))
+
 /obj/item/device/assembly/prox_sensor/activate()
 	if(!..())
 		return 0//Cooldown check

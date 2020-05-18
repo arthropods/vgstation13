@@ -239,7 +239,8 @@
 	src.move_speed = world.timeofday - src.l_move_time
 	src.l_move_time = world.timeofday
 	// Update on_moved listeners.
-	INVOKE_EVENT(on_moved,list("loc"=NewLoc))
+	INVOKE_EVENT(on_moved, list("loc"=NewLoc))
+	SignalComponents(COMSIG_MOVED, list("movable" = src, "source" = oldloc, "target" = NewLoc))
 
 /atom/movable/search_contents_for(path,list/filter_path=null) // For vehicles
 	var/list/found = ..()

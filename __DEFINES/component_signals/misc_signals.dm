@@ -6,16 +6,6 @@
  */
 #define COMSIG_STATE "state"
 
-/** Sent when we've been bumped.
- * @param movable /atom/movable: The bumping entity.
- */
-#define COMSIG_BUMPED "bumped"
-
-/** Sent when we've bumped someone else.
- * @param movable /atom/movable: The bumped entity.
- */
-#define COMSIG_BUMP   "bump"
-
 /** Sent by mob Life() tick. No arguments.
  */
 #define COMSIG_LIFE   "life"
